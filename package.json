@@ -8,5 +8,8 @@
     "name": "Dzmitry Shestsel",
     "email": "dshestel@gmail.com",
     "url": ""
+  },
+  "dependencies": {
+    "com.unity.editorcoroutines": "1.0.0"
   }
 }

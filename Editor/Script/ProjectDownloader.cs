@@ -17,7 +17,7 @@ namespace G2DManager
             "https://github.com/Cysharp/UniTask.git?path=src/UniTask/Assets/Plugins/UniTask",
         };
 
-        [MenuItem("Tools/Project Tuner")]
+        [MenuItem("Tools/Project Downloader")]
         private static void ShowProjectSettingsTuner()
         {
             ShowProjectDownloaderWindow();

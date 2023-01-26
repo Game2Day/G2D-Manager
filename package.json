@@ -1,11 +1,12 @@
 {
-  "dependencies": {
-    "com.cysharp.unitask": {
-      "version": "https://github.com/Cysharp/UniTask.git?path=src/UniTask/Assets/Plugins/UniTask",
-      "depth": 0,
-      "source": "git",
-      "dependencies": {},
-      "hash": "73d86259ce31ce7f4dfe1d028ea1c3edf96c23e4"
-    }
+  "name": "com.g2d.manager",
+  "version": "1.0.0",
+  "displayName": "G2D Manager",
+  "description": "G2D Initial Package Downloader",
+  "unity": "2020.3",
+  "author": {
+    "name": "Dzmitry Shestsel",
+    "email": "dshestel@gmail.com",
+    "url": ""
   }
 }

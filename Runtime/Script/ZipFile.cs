@@ -35,7 +35,6 @@ namespace G2DManager
                     if (directoryName.Length > 0)
                     {
                         var dirPath = Path.Combine(filePath, directoryName);
-                        Debug.Log($"{dirPath}");
 
 #if UNITY_EDITOR
                         //Debug.LogFormat("CreateDirectory: {0}", dirPath);

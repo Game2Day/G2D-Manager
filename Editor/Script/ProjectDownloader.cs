@@ -68,7 +68,7 @@ namespace G2DManager
         
         private void DownloadProject()
         {
-            var githubToken = "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";
+            var githubToken = "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";
             var url = "https://github.com/Game2Day/InitialPackage/zipball/master/";
             var path = Application.dataPath + "/G2D";
 

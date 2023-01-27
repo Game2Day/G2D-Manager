@@ -102,7 +102,15 @@ namespace G2DManager
                     new System.Net.Http.Headers.AuthenticationHeaderValue("Basic", credentials);
                 var contents = client.GetByteArrayAsync(url).Result;
                 EditorUtility.DisplayProgressBar("Download", "Download Repository zip", 0);
-                ZipFile.UnZip(path, contents);
+                
+                try
+                {
+                    ZipFile.UnZip(path, contents);
+                }
+                catch
+                {
+                    EditorUtility.ClearProgressBar();
+                }
             }
             
             EditorUtility.ClearProgressBar();

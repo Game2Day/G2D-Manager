@@ -107,10 +107,12 @@ namespace G2DManager
                 {
                     ZipFile.UnZip(path, contents);
                 }
-                catch
+                catch (Exception e)
                 {
                     EditorUtility.ClearProgressBar();
+                    Debug.LogError(e);
                 }
+                
             }
             
             EditorUtility.ClearProgressBar();

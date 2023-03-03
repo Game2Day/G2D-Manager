@@ -1,6 +1,6 @@
 using UnityEditor;
 
-namespace G2DManager
+namespace JT
 {
     public static class TokenPrefsHelper
     {

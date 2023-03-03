@@ -1,8 +1,8 @@
 {
-  "name": "com.g2d.manager",
+  "name": "com.jt.importer",
   "version": "1.0.0",
-  "displayName": "G2D Manager",
-  "description": "G2D Initial Package Downloader",
+  "displayName": "JT Meta Importer",
+  "description": "JT Meta Importer",
   "unity": "2020.3",
   "author": {
     "name": "Dzmitry Shestsel",

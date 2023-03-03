@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO;
 
-namespace G2DManager
+namespace JT
 {
     public class UriHelper
     {

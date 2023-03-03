@@ -1,12 +1,14 @@
 using System;
 using System.Collections;
 using System.IO;
+using ICSharpCode.SharpZipLib.Core;
+using ICSharpCode.SharpZipLib.Zip;
 using Unity.EditorCoroutines.Editor;
 using UnityEditor;
 using UnityEditor.PackageManager;
 using UnityEngine;
 
-namespace G2DManager
+namespace JT
 {
     public class ProjectDownloader : EditorWindow
     {
@@ -63,7 +65,7 @@ namespace G2DManager
             window.titleContent.text = "ProjectDownloader";
             window.Show();
         }
-
+        
         private void SetupPackages()
         {
             if (_coroutine != null)
@@ -88,10 +90,60 @@ namespace G2DManager
             DownloadProject();
         }
         
+        public static void SaveByteArrayToFileWithFileStream(byte[] data, string filePath)
+        {
+            using var stream = File.Create(filePath);
+            stream.Write(data, 0, data.Length);
+        }
+        
+        private static void UncompressFromZip(string archivePath, string relativePath, string outFolder)
+        {
+            using var fs = File.OpenRead(archivePath);
+            using var zf = new ZipFile(fs);
+
+            foreach (ZipEntry zipEntry in zf)
+            {
+                if (!zipEntry.IsFile)
+                {
+                    continue;
+                }
+
+                var fileDirectory = Path.GetDirectoryName(zipEntry.Name);
+                if (fileDirectory != null)
+                {
+                    var s = fileDirectory.Split('/');
+                    string cached = string.Empty;
+                    for (int i = 0; i < s.Length; i++)
+                    {
+                        if (s[i].StartsWith(relativePath))
+                        {
+                            cached = s[i];
+                        }
+                    }
+                    
+                    var entryFileName = zipEntry.Name.Remove(0, cached.Length == 0 ? 0 : cached.Length + 1);
+                    var fullZipToPath = Path.Combine(outFolder, entryFileName);
+                    var directoryName = Path.GetDirectoryName(fullZipToPath);
+
+                    if (!string.IsNullOrEmpty(directoryName))
+                    {
+                        Directory.CreateDirectory(directoryName);
+                    }
+                
+                    var buffer = new byte[4096];
+                
+                    using var zipStream = zf.GetInputStream(zipEntry);
+                    using Stream fsOutput = File.Create(fullZipToPath);
+                
+                    StreamUtils.Copy(zipStream, fsOutput, buffer);
+                }
+            }
+        }
+        
         private void DownloadProject()
         {
-            var url = "https://github.com/Game2Day/InitialPackage/zipball/master/";
-            var path = Application.dataPath + "/G2D";
+            var url = "https://github.com/Jungle-Tavern/Meta/zipball/master/";
+            var pathToFolder = Path.Combine(Application.dataPath, "Meta");
 
             using (var client = new System.Net.Http.HttpClient())
             {
@@ -105,7 +157,14 @@ namespace G2DManager
                 
                 try
                 {
-                    ZipFile.UnZip(path, contents);
+                    var pathToFile = Path.Combine(Application.dataPath, "RepositoryArchive");
+
+                    SaveByteArrayToFileWithFileStream(contents, pathToFile);
+                    
+                    UncompressFromZip(pathToFile, "Jungle-Tavern-Meta", pathToFolder);
+                    FileUtil.DeleteFileOrDirectory(pathToFile);
+                    AssetDatabase.Refresh();
+                    AssetDatabase.SaveAssets();
                 }
                 catch (Exception e)
                 {

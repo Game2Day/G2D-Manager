@@ -1,5 +1,5 @@
 {
-    "name": "G2DManagerAssembly",
+    "name": "JungleTavernAssembly",
     "rootNamespace": "",
     "references": [
         "Unity.EditorCoroutines.Editor"

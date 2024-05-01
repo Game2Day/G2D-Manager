@@ -14,6 +14,7 @@ namespace JT
     {
         private static readonly string[] PackagePaths =
         {
+            "com.unity.nuget.newtonsoft-json",
             "https://github.com/neuecc/UniRx.git?path=Assets/Plugins/UniRx/Scripts",
             "https://github.com/Cysharp/UniTask.git?path=src/UniTask/Assets/Plugins/UniTask",
         };
@@ -46,13 +47,13 @@ namespace JT
             
             GUILayout.Space(10);
             
-            if (GUILayout.Button($"Download Project"))
+            if (GUILayout.Button($"Import Meta Packages"))
             {
                 SetupPackages();
             }
         }
 
-        [MenuItem("Tools/Project Downloader")]
+        [MenuItem("Tools/Meta Importer")]
         private static void ShowProjectSettingsTuner()
         {
             ShowProjectDownloaderWindow();
@@ -62,7 +63,7 @@ namespace JT
         {
             ProjectDownloader window =
                 (ProjectDownloader)GetWindow(typeof(ProjectDownloader));
-            window.titleContent.text = "ProjectDownloader";
+            window.titleContent.text = "Meta Importer";
             window.Show();
         }
         
@@ -82,7 +83,7 @@ namespace JT
             foreach (var package in PackagePaths)
             {
                 var request = Client.Add(package);
-                EditorUtility.DisplayProgressBar("Download", "Download Repository zip", 0);
+                EditorUtility.DisplayProgressBar("Importing", "Importing packages", 0);
                 yield return new WaitUntil(() => request.IsCompleted);
                 EditorUtility.ClearProgressBar();
             }
@@ -90,7 +91,7 @@ namespace JT
             DownloadProject();
         }
         
-        public static void SaveByteArrayToFileWithFileStream(byte[] data, string filePath)
+        private static void SaveByteArrayToFileWithFileStream(byte[] data, string filePath)
         {
             using var stream = File.Create(filePath);
             stream.Write(data, 0, data.Length);

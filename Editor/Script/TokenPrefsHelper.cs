@@ -4,7 +4,7 @@ namespace JT
 {
     public static class TokenPrefsHelper
     {
-        private const string GithubToken = "g2d.manager.github_token";
+        private const string GithubToken = "jt.manager.github_token";
 
         public static string Load()
         {

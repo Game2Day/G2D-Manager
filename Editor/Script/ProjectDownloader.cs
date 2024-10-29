@@ -162,7 +162,7 @@ namespace JT
 
                     SaveByteArrayToFileWithFileStream(contents, pathToFile);
                     
-                    UncompressFromZip(pathToFile, "Jungle-Tavern-Core", pathToFolder);
+                    UncompressFromZip(pathToFile, "jungle-tavern-core", pathToFolder);
                     FileUtil.DeleteFileOrDirectory(pathToFile);
                     AssetDatabase.Refresh();
                     AssetDatabase.SaveAssets();

@@ -47,13 +47,13 @@ namespace JT
             
             GUILayout.Space(10);
             
-            if (GUILayout.Button($"Import Meta Packages"))
+            if (GUILayout.Button($"Import Core Packages"))
             {
                 SetupPackages();
             }
         }
 
-        [MenuItem("Tools/Meta Importer")]
+        [MenuItem("Tools/Core Importer")]
         private static void ShowProjectSettingsTuner()
         {
             ShowProjectDownloaderWindow();
@@ -63,7 +63,7 @@ namespace JT
         {
             ProjectDownloader window =
                 (ProjectDownloader)GetWindow(typeof(ProjectDownloader));
-            window.titleContent.text = "Meta Importer";
+            window.titleContent.text = "Core Importer";
             window.Show();
         }
         
@@ -143,8 +143,8 @@ namespace JT
         
         private void DownloadProject()
         {
-            var url = "https://github.com/Jungle-Tavern/Meta/zipball/master/";
-            var pathToFolder = Path.Combine(Application.dataPath, "Meta");
+            var url = "https://github.com/Jungle-Tavern/core/zipball/master/";
+            var pathToFolder = Path.Combine(Application.dataPath, "Core");
 
             using (var client = new System.Net.Http.HttpClient())
             {
@@ -162,7 +162,7 @@ namespace JT
 
                     SaveByteArrayToFileWithFileStream(contents, pathToFile);
                     
-                    UncompressFromZip(pathToFile, "Jungle-Tavern-Meta", pathToFolder);
+                    UncompressFromZip(pathToFile, "Jungle-Tavern-Core", pathToFolder);
                     FileUtil.DeleteFileOrDirectory(pathToFile);
                     AssetDatabase.Refresh();
                     AssetDatabase.SaveAssets();

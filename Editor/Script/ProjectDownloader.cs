@@ -144,7 +144,7 @@ namespace JT
         private void DownloadProject()
         {
             var url = "https://github.com/Jungle-Tavern/core/zipball/master/";
-            var pathToFolder = Path.Combine(Application.dataPath, "core");
+            var pathToFolder = Path.Combine(Application.dataPath, "Meta");
 
             using (var client = new System.Net.Http.HttpClient())
             {

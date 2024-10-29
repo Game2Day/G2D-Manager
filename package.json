@@ -1,8 +1,8 @@
 {
   "name": "com.jt.importer",
   "version": "1.0.0",
-  "displayName": "JT Meta Importer",
-  "description": "JT Meta Importer",
+  "displayName": "JT Core Importer",
+  "description": "JT Core Importer",
   "unity": "2020.3",
   "author": {
     "name": "Dzmitry Shestsel",
